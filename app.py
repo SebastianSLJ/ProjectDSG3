@@ -2,12 +2,11 @@ import os
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-from curses.ascii import isalnum
+
 
 from helpers import login_required, database, split_dict, stringify, lookup, readable_list
 
 
-# From CS50 pset9 Finance #######################################################
 
 # Configure app
 app = Flask(__name__)

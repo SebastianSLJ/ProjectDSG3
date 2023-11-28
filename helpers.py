@@ -7,8 +7,8 @@ from flask import redirect, session, request
 from functools import wraps
 from typing import Any, List
 
-
-# From CS50 pset9 Finance #######################################################
+os.environ["API_KEY"] = "e6d569b8f782d63ec69b3b33b4f87a3c	—"
+os.environ["API_ID"] = "73f77a4a"
 
 
 def login_required(f):
