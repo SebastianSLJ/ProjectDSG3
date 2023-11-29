@@ -2,9 +2,8 @@ import os
 from flask import Flask, redirect, render_template, request, session
 from flask_session import Session
 from werkzeug.security import check_password_hash, generate_password_hash
-
-
 from helpers import login_required, database, split_dict, stringify, lookup, readable_list
+import sqlite3
 
 
 
@@ -299,18 +298,24 @@ def login():
 
         con, cur = database()
         rows = cur.execute("SELECT * FROM users WHERE username = ?",
-            (request.form.get("username"),)
-        )
-        rows = rows.fetchall()
-        
-        validate_password = check_password_hash(rows[0][3], request.form.get("password"))
+                  (username,)).fetchall()
 
-        # Ensure username exists and password is correct
-        if len(rows) != 1 or not validate_password:
+        # Ensure at least one row exists
+        if len(rows) == 0:
             message = "Invalid username and/or password!"
-            return render_template("login.html",
-                message=message,
-            )
+            return render_template("login.html", message=message)
+
+        # Iterate through rows and check passwords
+        for row in rows:
+            validate_password = check_password_hash(row[3], password)
+            if validate_password:
+                session["user_id"] = row[0]
+                con.close()
+                return redirect("/")
+
+        # If no matching password is found
+        message = "Invalid username and/or password!"
+        return render_template("login.html", message=message)
 
         session["user_id"] = rows[0][0]
         con.close()
@@ -348,12 +353,13 @@ def register():
                 pw)
             )
             con.commit()
-            con.close()
+            user_id = cur.lastrowid   
+            con.close()         
 
-            session["user_id"] = user
+            session["user_id"] = user_id
 
             return redirect("/")
-        except:
+        except sqlite3.IntegrityError:
             message = "Username has been taken. Please pick a different username!"
             return render_template("register.html",
                 message=message,
