@@ -9,7 +9,7 @@
     <!-- Headline -->
     {% if saved_recipes_list %}
         <div class="my-3 text-left">
-            <h5>Bookmarked recipes:</h5>
+            <h5>Recetas Favoritas:</h5>
         </div>
     {% endif %}
 
@@ -18,10 +18,10 @@
         <!-- Handle error -->
         {% if not saved_recipes_list %}
         <div class="text-center">
-            <div class="fs-1 fw-7 text-center mb-3">Nothing here!</div>
-            <div class="fs-5">You haven't bookmarked any recipe so far.</div>
-            <div class="fs-5 mb-5">Start browsing to have a list of your favorite recipes!</div>
-            <a href="/" class="fw-6 fs-4">Start now!</a>
+            <div class="fs-1 fw-7 text-center mb-3">Por aqui no hay nada!</div>
+            <div class="fs-5">No has añadido ninguna receta a favoritos todavia.</div>
+            <div class="fs-5 mb-5">¡Empieza a navegar para tener una lista de tus recetas favoritas!</div>
+            <a href="/" class="fw-6 fs-4">Empecemos!</a>
         </div>
         {% else %}
         <!-- Show result  -->
