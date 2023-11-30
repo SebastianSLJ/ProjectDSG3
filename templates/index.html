@@ -9,7 +9,7 @@
     <!-- Headline -->
     <div class="my-3 text-left">
         <h2 class="mb-3 fw-6 text-capitalize">hi, {{ name[0][0] }} <span class="wave noto">👋</span></h2>
-        <h5>Let's get cooking good looking!</h5>
+        <h5>Pongamonos a cocinar!</h5>
     </div>
 
     <!-- Get input -->
@@ -17,7 +17,7 @@
         <form action="/result" method="GET" autocomplete="off">
             <!-- Ingredients -->
             <div class="mb-5" id="ingredientsWrapper">
-                <p class="fw-normal" style="text-align: left!important;">Enter the first query or ingredient before adding more.</p>
+                <p class="fw-normal" style="text-align: left!important;">Selecciona un primer ingrediente antes de añadir mas.</p>
                 <div class="px-lg-5 px-sm-0 field mb-3">
                     <input type="text" class="border-0 me-2 form-control form-control-sm" name="ingredients" id="ingredients" 
                         placeholder="Enter query or ingredient" autofocus />
@@ -27,7 +27,7 @@
             </div>
             <!-- Dish Type  -->
             <div class="mb-5" id="dishTypeWrapper">
-                <p class="fw-normal" style="text-align: left!important;">Dish Type<span class="ms-1 small text-muted">(optional)</span> 
+                <p class="fw-normal" style="text-align: left!important;">Tipo de plato<span class="ms-1 small text-muted">(optional)</span> 
                     <a href="javascript:void(0)" id="dish" class="toggler small text-muted ms-2 bi bi-chevron-down"></a>
                 </p>
                 <div id="dishListWrapper" class="hide">
@@ -44,7 +44,7 @@
             </div>
             <!-- Cuisine Type Labels  -->
             <div class="mb-5" id="cuisineTypeWrapper">
-                <p class="fw-normal" style="text-align: left!important;">Cuisine Type<span
+                <p class="fw-normal" style="text-align: left!important;">Tipo de cocina<span
                         class="ms-1 small text-muted">(optional)</span>
                     <a href="javascript:void(0)" id="cuisine" class="toggler small text-muted ms-2 bi bi-chevron-down"></a>
                 </p>
@@ -82,7 +82,7 @@
             </div>
             <!-- Health Labels  -->
             <div class="mb-5" id="healthLabelsWrapper">
-                <p class="fw-normal" style="text-align: left!important;">Allergies / Restrictions<span class="ms-1 small text-muted">(optional)</span>
+                <p class="fw-normal" style="text-align: left!important;">Alergias / Restricciones<span class="ms-1 small text-muted">(optional)</span>
                     <a href="javascript:void(0)" id="health" class="toggler small text-muted ms-2 bi bi-chevron-down"></a>
                 </p>
                 <div id="healthListWrapper" class="hide">
