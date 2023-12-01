@@ -24,10 +24,10 @@
         <!-- Handle error -->
         {% if not recipes_list %}
         <div class="text-center">
-            <div class="fs-1 fw-7 text-center mb-3">No result! <span class="noto">🙁</span></div>
-            <div class="fs-5">We couldn't find recipes that match all of your requirements.</div>
-            <div class="fs-5 mb-5">Please make sure there's no typo in your query.</div>
-            <a href="/" class="fw-6 fs-4">Try Again?</a>
+            <div class="fs-1 fw-7 text-center mb-3">Sin resultados. <span class="noto">🙁</span></div>
+            <div class="fs-5">No tenemos recestas con tantos ingredientes .</div>
+            <div class="fs-5 mb-5">Asegúrese de que no haya ningún error tipográfico en su consulta.</div>
+            <a href="/" class="fw-6 fs-4">Intentar de nuevo?</a>
         </div>
         {% else %}
         <!-- Show result -->
@@ -104,7 +104,7 @@
                                         </div>
                                         <!-- View recipe -->
                                         <div class="mb-3 text-center">
-                                            <a href="{{ recipe['url'] }}" target=”_blank”><button type="button" class=" yellow px-5 btn btn-primary">View Full Recipe <span class="bi bi-box-arrow-up-right"></span></button></a>
+                                            <a href="{{ recipe['url'] }}" target=”_blank”><button type="button" class=" yellow px-5 btn btn-primary">Ver receta completa <span class="bi bi-box-arrow-up-right"></span></button></a>
                                         </div>
                                     </div>
                                     <!-- Title, Source, & Ingredients -->
@@ -120,7 +120,7 @@
                                         </div>
                                         <!-- Ingredients -->
                                         <div class="mb-3">
-                                            <div class="lh-sm text-muted mb-2">Ingredients:</div>
+                                            <div class="lh-sm text-muted mb-2">Ingredientes:</div>
                                             <small class="lh-1 text-lowercase">
                                                 <ul class="list-group border-top border-bottom list-group-flush mb-3">
                                                     {% for line in recipe['ingredientLines'] %}
@@ -135,13 +135,13 @@
                                 <!-- Expanded Tags -->
                                 <div class="row mb-3 px-4">
                                     <div class="col-12 px-0">
-                                        <div class="lh-base text-muted py-2">Show Tags
+                                        <div class="lh-base text-muted py-2">Mostrar etiquetas
                                             <a href="javascript:void(0)" id="tag" class="toggler small text-muted ms-2 bi bi-chevron-down"></a>
                                         </div>
                                         <div class="mb-4 py-2 border-top border-bottom hide">
                                             <!-- Dish Tags -->
                                             <div class="mb-1">
-                                                <div class="lh-base small text-muted">Dish Type:</div>
+                                                <div class="lh-base small text-muted">Tipo de plato:</div>
                                                 <small class="ps-2 lh-1 text-uppercase d-flex flex-wrap">
                                                     {% for dish in recipe['dishType']|sort %}
                                                         {% if dish in dishtype%}
@@ -152,7 +152,7 @@
                                             </div>
                                             <!-- Diet Tags -->
                                             <div class="mb-1">
-                                                <div class="lh-sm small text-muted">Diet Type:</div>
+                                                <div class="lh-sm small text-muted">Tipo de dieta:</div>
                                                 <small class="ps-2 lh-1 text-uppercase d-flex flex-wrap">
                                                     {% for diet in recipe['dietLabels']|sort %}
                                                         <small class="fw-4 p-2 mb-1 me-1 form">{{ diet }}</small>
@@ -161,7 +161,7 @@
                                             </div>
                                             <!-- Health Tags -->
                                             <div class="mb-1">
-                                                <div class="lh-sm small text-muted">Allergy / Restriction:</div>
+                                                <div class="lh-sm small text-muted">Alergias / Restricciones:</div>
                                                 <small class="ps-2 lh-1 text-uppercase d-flex flex-wrap">
                                                     {% for health in recipe['healthLabels']|sort %}
                                                         <small class="fw-4 p-2 mb-1 me-1 form">{{ health }}</small>
@@ -170,7 +170,7 @@
                                             </div>
                                             <!-- Cuisine Tags -->
                                             <div class="mb-1">
-                                                <div class="lh-sm small text-muted">Cuisine Type:</div>
+                                                <div class="lh-sm small text-muted">Tipo de cocina:</div>
                                                 <small class="ps-2 lh-1 text-uppercase d-flex flex-wrap">
                                                     {% for cuisine in recipe['cuisineType']|sort %}
                                                         <small class="fw-4 p-2 mb-1 me-1 form">{{ cuisine }}</small>
