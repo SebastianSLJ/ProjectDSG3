@@ -7,8 +7,8 @@ from flask import redirect, session, request
 from functools import wraps
 from typing import Any, List
 
-os.environ["API_KEY"] = "e6d569b8f782d63ec69b3b33b4f87a3c	—"
-os.environ["API_ID"] = "73f77a4a"
+os.environ["API_KEY"] = "bc317066eb0af72fd4266848da484800"
+os.environ["API_ID"] = "2de64a60"
 
 
 def login_required(f):
@@ -52,6 +52,7 @@ def stringify(list_name, string):
     return list, stringified
         
     
+
 def lookup(param):
     try:
         api_key = os.environ.get("API_KEY")
@@ -62,9 +63,9 @@ def lookup(param):
     except requests.RequestException:
         return None
     try:
-        result = response.json()
-        # count = result["count"]
-        # next = result["_links"]["next"]["href"]
+        result = response.json()        
+        count = result["count"]
+        next = result["_links"]["next"]["href"]
         hits_dict = result["hits"]
         recipes_list = []
         for index in hits_dict:
@@ -95,7 +96,7 @@ def lookup(param):
                     "cuisineType": cuisineType,
                     "dishType": dishType
                 })
-        return recipes_list  # , next, count
+        return recipes_list
     except (KeyError, TypeError, ValueError):
         return None
 
@@ -111,44 +112,3 @@ def readable_list(seq: List[Any]) -> str:
     return ', '.join(seq[:-1]) + ', and ' + seq[-1]
 
 
-# def lookup_recipe(link):
-#     try:
-#         response = requests.get(link)
-#         response.raise_for_status()
-#     except requests.RequestException:
-#         return None
-#     try:
-#         result = response.json()
-#         print(type(result))  # dict
-#         recipe_info = []
-#         for key in result:
-#             link = key["_links"]["self"]["href"]
-#             label = key["recipe"]["label"]
-#             image = key["recipe"]["image"]
-#             source = key["recipe"]["source"]
-#             url = key["recipe"]["url"]
-#             dietLabels = list(key["recipe"]["dietLabels"])
-#             healthLabels = list(key["recipe"]["healthLabels"])
-#             ingredientLines = list(key["recipe"]["ingredientLines"])
-#             calories = key["recipe"]["calories"]
-#             totalTime = key["recipe"]["totalTime"]
-#             cuisineType = key["recipe"]["cuisineType"]
-#             dishType = key["recipe"]["dishType"]
-#             recipe_info.append(
-#                 {
-#                     "link": link,
-#                     "label": label,
-#                     "image": image,
-#                     "source": source,
-#                     "url": url,
-#                     "dietLabels": dietLabels,
-#                     "healthLabels": healthLabels,
-#                     "ingredientLines": ingredientLines,
-#                     "calories": calories,
-#                     "totalTime": totalTime,
-#                     "cuisineType": cuisineType,
-#                     "dishType": dishType
-#                 })
-#         return recipe_info
-#     except (KeyError, TypeError, ValueError):
-#         return None
