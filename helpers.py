@@ -53,6 +53,41 @@ def stringify(list_name, string):
         
     
 
+class RecipeNode:
+    def __init__(self, link, label, image, source, url, dietLabels, healthLabels, ingredientLines, calories, totalTime, cuisineType, dishType):
+        self.link = link
+        self.label = label
+        self.image = image
+        self.source = source
+        self.url = url
+        self.dietLabels = dietLabels
+        self.healthLabels = healthLabels
+        self.ingredientLines = ingredientLines
+        self.calories = calories
+        self.totalTime = totalTime
+        self.cuisineType = cuisineType
+        self.dishType = dishType
+        self.children = []
+
+def build_recipe_tree(hits_dict):
+    recipes_list = []
+    for index in hits_dict:
+        link = index["_links"]["self"]["href"]  # Recipe's JSON link
+        label = index["recipe"]["label"]
+        image = index["recipe"]["image"]
+        source = index["recipe"]["source"]
+        url = index["recipe"]["url"]  # Source link
+        dietLabels = list(index["recipe"]["dietLabels"])
+        healthLabels = list(index["recipe"]["healthLabels"])
+        ingredientLines = list(index["recipe"]["ingredientLines"])
+        calories = index["recipe"]["calories"]
+        totalTime = index["recipe"]["totalTime"]
+        cuisineType = list(index["recipe"]["cuisineType"])
+        dishType = list(index["recipe"]["dishType"])
+        recipe_node = RecipeNode(link, label, image, source, url, dietLabels, healthLabels, ingredientLines, calories, totalTime, cuisineType, dishType)
+        recipes_list.append(recipe_node)
+    return recipes_list
+
 def lookup(param):
     try:
         api_key = os.environ.get("API_KEY")
@@ -67,35 +102,7 @@ def lookup(param):
         count = result["count"]
         next = result["_links"]["next"]["href"]
         hits_dict = result["hits"]
-        recipes_list = []
-        for index in hits_dict:
-            link = index["_links"]["self"]["href"]  # Recipe's JSON link
-            label = index["recipe"]["label"]
-            image = index["recipe"]["image"]
-            source = index["recipe"]["source"]
-            url = index["recipe"]["url"]  # Source link
-            dietLabels = list(index["recipe"]["dietLabels"])
-            healthLabels = list(index["recipe"]["healthLabels"])
-            ingredientLines = list(index["recipe"]["ingredientLines"])
-            calories = index["recipe"]["calories"]
-            totalTime = index["recipe"]["totalTime"]
-            cuisineType = list(index["recipe"]["cuisineType"])
-            dishType = list(index["recipe"]["dishType"])
-            recipes_list.append(
-                {
-                    "link": link,
-                    "label": label,
-                    "image": image,
-                    "source": source,
-                    "url": url,
-                    "dietLabels": dietLabels,
-                    "healthLabels": healthLabels,
-                    "ingredientLines": ingredientLines,
-                    "calories": calories,
-                    "totalTime": totalTime,
-                    "cuisineType": cuisineType,
-                    "dishType": dishType
-                })
+        recipes_list = build_recipe_tree(hits_dict)
         return recipes_list
     except (KeyError, TypeError, ValueError):
         return None
